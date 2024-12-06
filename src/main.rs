@@ -110,9 +110,15 @@ if order == "increasing" {
     (bad_levels, safe)}
 
 fn problem_dampener(order: &mut String, line_num: &mut Vec<i64>) -> bool {
-
+//create 3 extra vecs to remove the value from and check
     let mut seq = line_num.clone();
+    let mut test1 = line_num.clone();
+    let mut test2 = line_num.clone();
+    let mut test3 = line_num.clone();
+
+
     let mut safe = false;
+    //let val = ();
 
 
         if order == "decreasing" {
@@ -123,8 +129,20 @@ fn problem_dampener(order: &mut String, line_num: &mut Vec<i64>) -> bool {
                 2 => continue,
                 3 => continue,
                 _ => {
-                    &seq.remove(i.0 + 1);
-                    safe =  difference(&mut seq, order).1;
+
+                    &test1.remove(i.0);
+                    &test2.remove(i.0 + 1);
+                    if i.0 == 0 {
+                        //pass
+                    }  else { &test3.remove(i.0 - 1); }
+
+                    if difference(&mut test1, order).1 {
+                        safe = true;
+                    } else if difference(&mut test2, order).1 {
+                        safe = true;
+                    } else if difference(&mut test3, order).1 {
+                        safe = true;
+                    };
                 },
             }
         }
@@ -136,8 +154,20 @@ fn problem_dampener(order: &mut String, line_num: &mut Vec<i64>) -> bool {
                     -2 => continue,
                     -3 => continue,
                     _ => {
-                        &seq.remove(i.0 + 1 );
-                        safe =  difference(&mut seq, order).1;
+
+                        &test1.remove(i.0);
+                        &test2.remove(i.0 + 1);
+                        if i.0 == 0 {
+                            //pass
+                        }  else { &test3.remove(i.0 - 1); }
+
+                        if difference(&mut test1, order).1 {
+                            safe = true;
+                        } else if difference(&mut test2, order).1 {
+                            safe = true;
+                        } else if difference(&mut test3, order).1 {
+                            safe = true;
+                        };
                     },
                 }
             }
